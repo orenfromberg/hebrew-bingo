@@ -2,6 +2,85 @@ const players = {}
 
 const bingo_cards = {}
 
+const heb_nums = [
+    "-",
+    "א",
+    "ב",
+    "ג",
+    "ד",
+    "ה",
+    "ו",
+    "ז",
+    "ח",
+    "ט",
+    "י",
+    "י״א",
+    "י״ב",
+    "י״ג",
+    "י״ד",
+    "ט״ו",
+    "ט״ז",
+    "י״ז",
+    "י״ח",
+    "י״ט",
+    "כ",
+    "כ״א",
+    "כ״ב",
+    "כ״ג",
+    "כ״ד",
+    "כ״ה",
+    "כ״ו",
+    "כ״ז",
+    "כ״ח",
+    "כ״ט",
+    "ל",
+    "ל״א",
+    "ל״ב",
+    "ל״ג",
+    "ל״ד",
+    "ל״ה",
+    "ל״ו",
+    "ל״ז",
+    "ל״ח",
+    "ל״ט",
+    "מ",
+    "מ״א",
+    "מ״ב",
+    "מ״ג",
+    "מ״ד",
+    "מ״ה",
+    "מ״ו",
+    "מ״ז",
+    "מ״ח",
+    "מ״ט",
+    "נ",
+    "נ״א",
+    "נ״ב",
+    "נ״ג",
+    "נ״ד",
+    "נ״ה",
+    "נ״ו",
+    "נ״ז",
+    "נ״ח",
+    "נ״ט",
+    "ס",
+    "ס״א",
+    "ס״ב",
+    "ס״ג",
+    "ס״ד",
+    "ס״ה",
+    "ס״ו",
+    "ס״ז",
+    "ס״ח",
+    "ס״ט",
+    "ע",
+    "ע״א",
+    "ע״ב",
+    "ע״ג",
+    "ע״ד",
+    "ע״ה"
+]
+
 const create_bingo_card = () => {
     let card = Array(5).fill(0).map(()=>[])
     for (let i = 0; i < 5; i++) {
@@ -94,6 +173,27 @@ let has_bingo = (card, vals) => {
 
     return result;
 }
+
+
+let hat = Array(75).fill(0).map((x,i) => x+i+1);
+let picked = [];
+
+const init_hat = () => {
+    hat = Array(75).fill(0).map((x,i) => x+i+1);
+    picked = []
+}
+
+const pick_from_hat = () => {
+    if (hat.length > 0) {
+        let val = hat.splice(Math.floor(Math.random() * hat.length), 1)
+        console.log(`You picked ${val[0]}`)
+        picked.push(...val)
+        console.log(JSON.stringify(picked.sort((a,b)=> a - b)))
+    } else {
+        console.log("all numbers have been picked!")
+    }
+}
+
 
 // c = create_bingo_card();
 
