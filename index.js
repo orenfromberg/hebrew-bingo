@@ -98,7 +98,7 @@ const create_bingo_card = () => {
 }
 
 
-const add_player = (name, players) => {
+const add_player = (name) => {
     if (players[name] == undefined) {
         players[name] = create_bingo_card()
     } else {
@@ -183,10 +183,10 @@ const init_hat = () => {
     picked = []
 }
 
-const pick_from_hat = () => {
+let pick = () => {
     if (hat.length > 0) {
         let val = hat.splice(Math.floor(Math.random() * hat.length), 1)
-        console.log(`You picked ${val[0]}`)
+        console.log(`You picked ${val[0]}:${heb_nums[val[0]]}`)
         picked.push(...val)
         console.log(JSON.stringify(picked.sort((a,b)=> a - b)))
     } else {
@@ -194,8 +194,26 @@ const pick_from_hat = () => {
     }
 }
 
+const check_for_bingo = () => {
+    for (const name in players) {
+        if (players.hasOwnProperty(name)) {
+            let c = players[name];
+            if (has_bingo(c, picked)) {
+                console.log(`${name} has bingo!`)
+            }
+        }
+    }
+}
 
-// c = create_bingo_card();
+const print_cards = () => {
+    for (const name in players) {
+        if (players.hasOwnProperty(name)) {
+            let c = players[name];
+            let vals = c[0].concat(c[1]).concat(c[2]).concat(c[3]).concat(c[4]).join(",")
+            console.log(`https://blog.orenfromberg.tech/bingo/?name=${encodeURI(name)}&vals=${vals}`)
+        }
+    }    
+}
 
-// print_card(c)
+print_cards()
 
