@@ -183,15 +183,19 @@ const init_hat = () => {
     picked = []
 }
 
+const reset_game = () => init_hat()
+
 let pick = () => {
     if (hat.length > 0) {
         let val = hat.splice(Math.floor(Math.random() * hat.length), 1)
-        console.log(`You picked ${val[0]}:${heb_nums[val[0]]}`)
+        console.log(`You picked ${val[0]}:\n${heb_nums[val[0]]}`)
         picked.push(...val)
         console.log(JSON.stringify(picked.sort((a,b)=> a - b)))
     } else {
         console.log("all numbers have been picked!")
     }
+
+    check_for_bingo();
 }
 
 const check_for_bingo = () => {
@@ -210,10 +214,9 @@ const print_cards = () => {
         if (players.hasOwnProperty(name)) {
             let c = players[name];
             let vals = c[0].concat(c[1]).concat(c[2]).concat(c[3]).concat(c[4]).join(",")
-            console.log(`https://blog.orenfromberg.tech/bingo/?name=${encodeURI(name)}&vals=${vals}`)
+            console.log(`${name}: https://blog.orenfromberg.tech/bingo/?name=${encodeURI(name)}&vals=${vals}`)
         }
     }    
 }
 
-print_cards()
 
